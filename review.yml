@@ -1,0 +1,97 @@
+aid: amp-bank
+name: AMP Bank
+review:
+  question: Does AMP Bank expose a confirmed public CDR Product Reference Data API,
+    and is any published contract bank-proprietary or the shared DSB standard?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+  specProvenance: |
+    The harvested OpenAPI (openapi/amp-bank-cds-banking-products-openapi.yml) is the
+    SHARED DSB Consumer Data Standards "CDR Banking API" v1.36.0 (contact
+    contact@dsb.gov.au, MIT licensed), NOT an AMP-proprietary contract. AMP publishes
+    no bank-specific OpenAPI/Swagger; its live PRD endpoints conform to this common
+    CDS contract. The example MTLS server URL in the spec is a DSB placeholder, not
+    AMP's host — AMP's real PRD base URLs are recorded below.
+findings:
+  summary: |
+    AMP Bank has a confirmed public, unauthenticated Consumer Data Right (CDR)
+    Product Reference Data (PRD) surface, exposed as TWO brand-specific endpoints:
+    the My AMP retail brand (BSB 939-200) at
+    https://api.cdr-api.amp.com.au/cds-au/v1 and the AMP Bank GO digital
+    small-business/everyday brand (BSB 939-900) at
+    https://pub.cdr-sme.amp.com.au/api/cds-au/v1. Both were fetched live and return
+    HTTP 200 with a data.products array and an x-v response header. My AMP answered
+    x-v 4 with 8 products; AMP Bank GO answered x-v 4 and x-v 5 with 9 products. AMP
+    documents these on a single public "Open Banking API" marketing/reference page
+    (https://www.amp.com.au/personal-banking/open-banking/open-banking-api) and does
+    NOT operate a full self-service developer portal with keys, an Up-style personal
+    banking API, or an interactive console; it defers to the DSB Consumer Data
+    Standards for the contract. The PRD endpoints are Public (no auth). The broader
+    CDR consumer data sharing surface (accounts, balances, transactions) is not
+    public: it is gated behind the CDR Accredited Data Recipient (ADR) model using
+    OAuth2/OIDC with the FAPI 1.0 Advanced profile, MTLS, and PAR, and was not probed
+    as it is out of scope for a public bootstrap.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.cdr-api.amp.com.au/cds-au/v1
+      documented: true
+      note: My AMP retail brand PRD. GET /banking/products confirmed HTTP 200, x-v 4, 8 products.
+    - protocol: REST
+      scheme: https
+      baseURL: https://pub.cdr-sme.amp.com.au/api/cds-au/v1
+      documented: true
+      note: AMP Bank GO SME/digital brand PRD. GET /banking/products confirmed HTTP 200, x-v 4 and 5, 9 products.
+  authModel:
+    prdEndpoints: Public / unauthenticated (CDS x-v version header required)
+    consumerDataSharing: CDR ADR model - OAuth2/OIDC FAPI 1.0 Advanced, MTLS, PAR (not public, not probed)
+  probes:
+    - url: https://api.cdr-api.amp.com.au/cds-au/v1/banking/products?page-size=10
+      requestHeader: 'x-v: 4'
+      httpStatus: 200
+      responseXV: 4
+      productsReturned: 8
+      sample: [AMP Superedge Loan, AMP First Home Loan, Land Loan, Professional Package]
+    - url: https://api.cdr-api.amp.com.au/cds-au/v1/banking/products
+      requestHeader: 'x-v: 3'
+      httpStatus: 406
+      note: UnsupportedVersion - confirms live CDS version negotiation.
+    - url: https://pub.cdr-sme.amp.com.au/api/cds-au/v1/banking/products?page-size=10
+      requestHeader: 'x-v: 4'
+      httpStatus: 200
+      productsReturned: 9
+      sample: [AMP Bank GO Business Save, AMP Bank GO Save, AMP Bank GO Joint Everyday Account, AMP Bank GO 12 Month Business Term Deposit]
+    - url: https://pub.cdr-sme.amp.com.au/cds-au/v1/banking/products
+      requestHeader: 'x-v: 4'
+      httpStatus: 404
+      note: The SME brand requires the /api/ path prefix; without it returns 404.
+    - url: https://api.amp.com.au/cds-au/v1/banking/products
+      requestHeader: 'x-v: 3'
+      httpStatus: 403
+      note: Not the CDR host - Incapsula WAF blocks. AMP's PRD is on the cdr-api / cdr-sme subdomains.
+  developerPortal:
+    exists: false
+    closest: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    note: A single public Open Banking API reference/marketing page; no keys, no console, no self-service onboarding.
+sources:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+    note: AMP Open Banking API page; documents both brand PRD base URLs and defers contract to the CDS.
+  - url: https://api.cdr-api.amp.com.au/cds-au/v1/banking/products
+    type: APIReference
+    note: My AMP PRD endpoint, confirmed live HTTP 200.
+  - url: https://pub.cdr-sme.amp.com.au/api/cds-au/v1/banking/products
+    type: APIReference
+    note: AMP Bank GO PRD endpoint, confirmed live HTTP 200.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/
+    type: Documentation
+    note: DSB Consumer Data Standards v1.36.0 - the shared contract AMP conforms to.
+  - url: https://raw.githubusercontent.com/ConsumerDataStandardsAustralia/standards/master/docs/includes/swagger/cds_banking.yaml
+    type: OpenAPI
+    note: Source of harvested spec - official DSB CDR Banking API OpenAPI 3.0.3, v1.36.0.
+actions:
+  openapiPath: openapi/amp-bank-cds-banking-products-openapi.yml
+  openapiProvenance: DSB Consumer Data Standards (shared), not AMP-proprietary.
+  apisYmlCreated: true

@@ -1,0 +1,91 @@
+aid: amp-bank
+url: https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/apis.yml
+name: AMP Bank
+kind: company
+description: AMP Bank Limited is the retail and business banking arm of AMP Limited
+  (ASX:AMP), a diversified Australian financial services group operating since 1849
+  and headquartered in Sydney. AMP Bank is a publicly listed (shareholder-owned, not
+  a mutual) authorised deposit-taking institution (ADI) regulated by APRA, offering
+  home loans, deposit and savings accounts, and the digital AMP Bank GO small-business
+  and everyday banking brand. As an active ADI, AMP participates in Australia's Consumer
+  Data Right (CDR / Open Banking) regime and exposes public, unauthenticated Product
+  Reference Data (PRD) APIs conforming to the DSB Consumer Data Standards, alongside
+  the accredited, FAPI-secured consumer data sharing surface used by authorised data
+  recipients.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Banks
+- Open Banking
+- CDR
+- Consumer Banking
+- Australia
+- Product Reference Data
+- ADI
+created: '2026-07-20'
+modified: '2026-07-20'
+specificationVersion: '0.19'
+apis:
+- aid: amp-bank:amp-bank-cdr-product-reference-data-api
+  name: AMP Bank CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+  baseURL: https://api.cdr-api.amp.com.au/cds-au/v1
+  properties:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+    type: APIReference
+  - url: openapi/amp-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right Product Reference Data (PRD)
+    API for the My AMP retail banking brand (BSB 939-200). Serves GET /banking/products
+    and /banking/products/{productId} conforming to the DSB Consumer Data Standards.
+    Confirmed live returning HTTP 200 (x-v 4) with eight AMP Bank products including
+    home loans, savings and term deposits. Requires the CDS x-v version header; no
+    authentication.
+- aid: amp-bank:amp-bank-go-cdr-product-reference-data-api
+  name: AMP Bank GO CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Small Business
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+  baseURL: https://pub.cdr-sme.amp.com.au/api/cds-au/v1
+  properties:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+    type: APIReference
+  - url: openapi/amp-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right Product Reference Data (PRD)
+    API for the AMP Bank GO digital small-business and everyday banking brand (BSB
+    939-900). Confirmed live returning HTTP 200 (x-v 4 and 5) with nine AMP Bank GO
+    products including business save, everyday and term deposit accounts, conforming
+    to the DSB Consumer Data Standards. Requires the CDS x-v version header; no authentication.
+common:
+- type: Website
+  url: https://www.amp.com.au/
+- type: Documentation
+  url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+- type: LinkedIn
+  url: https://www.linkedin.com/company/amp
+- type: TermsOfService
+  url: https://www.amp.com.au/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.amp.com.au/privacy
+- type: Support
+  url: https://www.amp.com.au/help-and-support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

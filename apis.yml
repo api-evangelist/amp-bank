@@ -74,9 +74,17 @@ apis:
     products including business save, everyday and term deposit accounts, conforming
     to the DSB Consumer Data Standards. Requires the CDS x-v version header; no authentication.
 common:
+- type: VulnerabilityDisclosure
+  url: security/amp-bank-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/amp-bank-domain-security.yml
 - type: Website
   url: https://www.amp.com.au/
 - type: Documentation
+  url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+- type: DeveloperPortal
+  url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+- type: GettingStarted
   url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
 - type: LinkedIn
   url: https://www.linkedin.com/company/amp
@@ -86,6 +94,35 @@ common:
   url: https://www.amp.com.au/privacy
 - type: Support
   url: https://www.amp.com.au/help-and-support
+- type: Security
+  url: https://hackerone.com/ampau
+  name: AMP responsible disclosure (HackerOne)
+- type: Authentication
+  url: authentication/amp-bank-authentication.yml
+- type: Conventions
+  url: conventions/amp-bank-conventions.yml
+- type: ErrorCatalog
+  url: errors/amp-bank-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/amp-bank-lifecycle.yml
+- type: Deprecation
+  url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+- type: Conformance
+  url: conformance/amp-bank-conformance.yml
+- type: DataModel
+  url: data-model/amp-bank-data-model.yml
+- type: MCPServer
+  url: mcp/amp-bank-mcp.yml
+- type: LLMsTxt
+  url: llms/amp-bank-llms.txt
+- type: Overlay
+  url: overlays/amp-bank-cds-banking-products-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/amp-bank-well-known.yml
+- type: SecurityTxt
+  url: well-known/amp-bank-security.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

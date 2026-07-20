@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml + DSB Consumer Data Standards
+versioning:
+  scheme: header-integer
+  current:
+    listBankingProducts: '5'
+    getBankingProductDetail: '7'
+  spec_version: 1.36.0
+  request_header: x-v (required), x-min-v (optional)
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+  note: >-
+    CDR uses per-endpoint integer versioning negotiated via the x-v/x-min-v
+    request headers. Obsolete endpoint versions are documented and retained
+    (e.g. get-products v1-v4, get-product-detail v1-v6) rather than removed.
+deprecation:
+  policy: >-
+    Consumer Data Standards define a formal change-management and
+    obsolescence lifecycle. Superseded endpoint versions are marked obsolete
+    (linked from each operation description) before retirement; new versions
+    are introduced additively.
+  sunset_header: false
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+status_page: null
+sla:
+  note: >-
+    CDR data holders are subject to DSB availability and performance
+    requirements (non-functional requirements / traffic thresholds); AMP does
+    not publish a separate public status page for the PRD surface.
+deprecated_operations: []

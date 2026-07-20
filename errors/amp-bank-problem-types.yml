@@ -1,0 +1,53 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml (4xx responses) + DSB Consumer Data Standards error catalogue
+format: cds-error-list
+envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2
+  shape: '{ errors: [ { code, title, detail, meta? } ] }'
+  note: >-
+    CDR does not use RFC 9457 application/problem+json. Errors are returned as a
+    ResponseErrorListV2 object with a urn:au-cds error code namespace.
+problems:
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/Invalid
+  title: Invalid Field
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/Missing
+  title: Missing Required Field
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 400
+  code: urn:au-cds:error:cds-all:Header/Missing
+  title: Missing Required Header
+  remediation: Supply the mandatory x-v version header.
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 400
+  code: urn:au-cds:error:cds-all:Header/InvalidVersion
+  title: Invalid Version
+  remediation: x-v (and x-min-v) must be positive integers.
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/InvalidDateTime
+  title: Invalid Date
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 400
+  code: urn:au-cds:error:cds-all:Field/InvalidPageSize
+  title: Invalid Page Size
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 404
+  code: urn:au-cds:error:cds-all:Resource/NotFound
+  title: Resource Not Found
+  remediation: The productId does not correspond to a known product.
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+- status: 406
+  code: urn:au-cds:error:cds-all:Header/UnsupportedVersion
+  title: Unsupported Version
+  remediation: Request a supported endpoint version via x-v / x-min-v.
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
+- status: 422
+  code: urn:au-cds:error:cds-all:Field/InvalidPage
+  title: Invalid Page
+  remediation: The requested page is out of range.
+  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts

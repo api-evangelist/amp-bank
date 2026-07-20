@@ -1,0 +1,30 @@
+# AMP Bank
+
+> AMP Bank is the retail and business banking arm of AMP Limited (ASX:AMP), an APRA-authorised deposit-taking institution (ADI) headquartered in Sydney. As a participant in Australia's Consumer Data Right (CDR / Open Banking) regime, AMP exposes public, unauthenticated Product Reference Data (PRD) APIs conforming to the DSB Consumer Data Standards for both the My AMP retail brand (BSB 939-200) and the AMP Bank GO small-business brand (BSB 939-900).
+
+## APIs
+
+- [AMP Bank CDR Product Reference Data API](https://www.amp.com.au/personal-banking/open-banking/open-banking-api): Public PRD API for My AMP (BSB 939-200); base https://api.cdr-api.amp.com.au/cds-au/v1
+- [AMP Bank GO CDR Product Reference Data API](https://www.amp.com.au/personal-banking/open-banking/open-banking-api): Public PRD API for AMP Bank GO (BSB 939-900); base https://pub.cdr-sme.amp.com.au/api/cds-au/v1
+
+## Specs
+
+- [OpenAPI (CDR Banking, PRD)](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/openapi/amp-bank-cds-banking-products-openapi.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/authentication/amp-bank-authentication.yml): PRD is unauthenticated (public)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/conventions/amp-bank-conventions.yml): x-v versioning, page/page-size pagination, error envelope
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/errors/amp-bank-problem-types.yml)
+- [Lifecycle / versioning](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/lifecycle/amp-bank-lifecycle.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/conformance/amp-bank-conformance.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/data-model/amp-bank-data-model.yml)
+
+## Operations
+
+- listBankingProducts: GET /banking/products - list products openly offered to the market (requires x-v header).
+- getBankingProductDetail: GET /banking/products/{productId} - full detail for a single product.
+
+## Docs
+
+- [Open Banking API page](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
+- [Consumer Data Standards (DSB)](https://consumerdatastandardsaustralia.github.io/standards/#get-products)
+- [Security contact (security.txt)](https://www.amp.com.au/.well-known/security.txt)
+- [Vulnerability disclosure (HackerOne)](https://hackerone.com/ampau)

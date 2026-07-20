@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of AMP hosts (apis.yml baseURL + Website)
+hosts:
+- host: https://www.amp.com.au
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: amp-bank-security.txt
+    note: RFC 9116; contact ASCII-art obfuscated to infosec@amp.com.au, encryption pubkey published
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.cdr-api.amp.com.au
+  note: My AMP retail CDR PRD host (BSB 939-200); unauthenticated Product Reference Data only
+  documents:
+  - path: /cds-au/v1/.well-known/openid-configuration
+    status: 403
+    note: PRD host does not expose the CDR InfoSec (OIDC) discovery surface
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://pub.cdr-sme.amp.com.au
+  note: AMP Bank GO small-business CDR PRD host (BSB 939-900); unauthenticated Product Reference Data only
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404

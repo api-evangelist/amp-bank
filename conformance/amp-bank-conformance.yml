@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml + DSB Consumer Data Standards
+standards:
+- id: au-cdr-consumer-data-standards
+  conforms: true
+  evidence: Spec is the DSB CDR Banking API (title "CDR Banking API", contact Data Standards Body); live PRD endpoints return CDS payloads with x-v version headers.
+- id: cdr-product-reference-data
+  conforms: true
+  evidence: Exposes GET /banking/products and /banking/products/{productId} per the PRD (unauthenticated) profile.
+- id: header-integer-versioning
+  conforms: true
+  evidence: Mandatory x-v / optional x-min-v request headers; 406 on unsupported version.
+- id: page-number-pagination
+  conforms: true
+  evidence: page / page-size query params with meta.totalRecords/totalPages and RFC5988-style links.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use the CDR ResponseErrorListV2 (urn:au-cds error codes), not application/problem+json.
+- id: fapi-1-advanced
+  conforms: false
+  evidence: Not applicable to the public PRD surface; FAPI applies to the accredited data-sharing surface, which is not exposed in this spec.
+- id: oauth2-oidc
+  conforms: false
+  evidence: PRD is unauthenticated; OAuth2/OIDC apply only to the accredited consumer data-sharing surface.
+regulatory_context:
+  regime: Consumer Data Right (CDR / Open Banking) - Australia
+  regulator: APRA-authorised deposit-taking institution (ADI); ACCC/OAIC/DSB CDR regime
+  brands:
+  - {brand: My AMP, bsb: 939-200}
+  - {brand: AMP Bank GO, bsb: 939-900}

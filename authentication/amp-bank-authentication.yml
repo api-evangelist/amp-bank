@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml
+summary:
+  types: []
+  authenticated: false
+  note: >-
+    The AMP Bank and AMP Bank GO surfaces captured in this repo are the CDR
+    Product Reference Data (PRD) endpoints (GET /banking/products and
+    /banking/products/{productId}). Per the DSB Consumer Data Standards, PRD is
+    a public, unauthenticated surface - the OpenAPI declares no securitySchemes
+    and requires no credential. The only mandatory request signalling is the
+    x-v (and optional x-min-v) CDS version header, not an auth header.
+schemes: []
+context:
+  regime: Consumer Data Right (CDR / Open Banking) - Australia
+  authenticated_surface: >-
+    The accredited consumer data sharing (non-PRD) surface, which is out of scope
+    of this published spec, is secured per the CDR Register/InfoSec profile:
+    FAPI 1.0 Advanced, OpenID Connect, OAuth 2.0, PAR, PKCE and mutual-TLS
+    sender-constrained tokens. AMP does not expose that surface as public OpenAPI.

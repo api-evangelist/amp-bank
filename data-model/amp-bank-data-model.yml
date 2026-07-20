@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml (components.schemas)
+scope: >-
+  Derived from the CDR Banking schemas. AMP's publicly exposed surface is the
+  Product Reference Data (PRD) entity graph rooted at BankingProduct; the wider
+  account/transaction entities exist in the spec but belong to the accredited
+  (authenticated) data-sharing surface not published by AMP.
+identifiers:
+- entity: BankingProduct
+  id_field: productId
+  type: ASCIIString
+  note: Opaque per-holder identifier returned by list, used to fetch detail.
+- entity: BankingAccount
+  id_field: accountId
+  type: ASCIIString
+entities:
+- name: BankingProduct
+  schemas: [BankingProductV6, BankingProductDetailV7]
+  description: A banking product openly offered to the market (home loans, savings, term deposits, transaction accounts).
+  key_fields: [productId, productCategory, brand, name, lastUpdated, effectiveFrom, effectiveTo]
+  relationships:
+  - {kind: has_one, target: BankingProductBundle, via: bundles}
+  - {kind: has_many, target: BankingProductFeatureV4, via: features}
+  - {kind: has_many, target: BankingProductConstraintV3, via: constraints}
+  - {kind: has_many, target: BankingProductEligibilityV2, via: eligibility}
+  - {kind: has_many, target: BankingProductFeeV2, via: fees}
+  - {kind: has_many, target: BankingProductDepositRateV2, via: depositRates}
+  - {kind: has_many, target: BankingProductLendingRateV3, via: lendingRates}
+  - {kind: has_one, target: BankingProductCardArt, via: cardArt}
+  - {kind: has_many, target: BankingProductAdditionalInformationV2, via: additionalInformation}
+- name: BankingProductFeeV2
+  description: A fee attached to a product.
+  relationships:
+  - {kind: has_many, target: BankingProductDiscountV2, via: discounts}
+- name: BankingProductDiscountV2
+  relationships:
+  - {kind: has_many, target: BankingProductDiscountEligibility, via: eligibility}
+- name: BankingProductDepositRateV2
+  relationships:
+  - {kind: has_many, target: BankingProductRateTierV4, via: tiers}
+- name: BankingProductLendingRateV3
+  relationships:
+  - {kind: has_many, target: BankingProductRateTierV4, via: tiers}
+- name: BankingProductRateTierV4
+  relationships:
+  - {kind: has_many, target: BankingProductRateConditionV2, via: applicabilityConditions}
+enumerations:
+- name: BankingProductCategoryV2
+  note: Product category filter shared between products and accounts (no hard product->account link exists in CDR).

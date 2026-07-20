@@ -1,0 +1,70 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml + DSB Consumer Data Standards
+summary: >-
+  Cross-cutting request/response semantics for AMP's CDR Product Reference Data
+  APIs, as mandated by the Data Standards Body (DSB) Consumer Data Standards.
+authentication:
+  style: none
+  note: PRD is public and unauthenticated; see authentication/amp-bank-authentication.yml
+versioning:
+  style: header
+  request_headers:
+  - name: x-v
+    required: true
+    description: Version of the endpoint requested by the client (positive integer).
+  - name: x-min-v
+    required: false
+    description: Minimum acceptable endpoint version; server responds with the highest supported between x-min-v and x-v.
+  response_headers:
+  - name: x-v
+    description: The endpoint version actually served.
+  unsupported: 406 Not Acceptable when no requested version is supported
+  cross_link: lifecycle/amp-bank-lifecycle.yml
+idempotency:
+  supported: false
+  note: >-
+    The captured surface is read-only (GET only), so no idempotency-key contract
+    applies. No Idempotency-Key header is defined or required.
+pagination:
+  style: page-number
+  request_params:
+  - name: page
+    default: 1
+    description: Page of results to request (standard pagination).
+  - name: page-size
+    default: 25
+    description: Page size to request; default 25.
+  response_fields:
+    meta:
+    - totalRecords
+    - totalPages
+    links:
+    - self
+    - first
+    - prev
+    - next
+    - last
+filtering:
+  - name: effective
+    values: [CURRENT, FUTURE, ALL]
+    default: CURRENT
+  - name: updated-since
+    description: Only include products updated after the specified date-time (delta polling).
+  - name: brand
+  - name: product-category
+    description: Filter by BankingProductCategory.
+error_envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2
+  shape: '{ errors: [ { code, title, detail, meta? } ] }'
+  code_namespace: urn:au-cds:error:cds-all / urn:au-cds:error:cds-banking
+  cross_link: errors/amp-bank-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  note: The DSB standards define traffic-thresholds for authenticated CDR calls; PRD signalling is not published in the OpenAPI.
+data_conventions:
+  dates: ISO 8601 DateTimeString / DateString (x-cds-type extensions)
+  amounts: AmountString (string-encoded decimal)
+  currency: CurrencyString (ISO 4217)
+  note: See the /banking/products endpoint description for feature-array conventions and additionalValue/additionalInfoUri fields.

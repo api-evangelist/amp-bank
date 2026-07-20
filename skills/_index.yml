@@ -1,0 +1,7 @@
+generated: '2026-07-20'
+method: generated
+skills:
+- file: amp-bank-lookup-products.md
+  name: Look up AMP Bank products (CDR PRD)
+  api: openapi/amp-bank-cds-banking-products-openapi.yml
+  operations: [listBankingProducts, getBankingProductDetail]

@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AMP Bank CDR Product Reference Data
+  version: 1.0.0
+extends: openapi/amp-bank-cds-banking-products-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: amp-bank
+    x-apievangelist-regime: Consumer Data Right (CDR) - Australia
+    x-apievangelist-prd: true
+    x-apievangelist-authenticated: false
+- target: $.servers
+  update:
+  - description: AMP Bank (My AMP) production PRD host - BSB 939-200
+    url: https://api.cdr-api.amp.com.au/cds-au/v1
+  - description: AMP Bank GO production PRD host - BSB 939-900
+    url: https://pub.cdr-sme.amp.com.au/api/cds-au/v1
+- target: $.paths['/banking/products'].get
+  update:
+    x-apievangelist-live: true
+    x-apievangelist-note: Confirmed live returning HTTP 200 across AMP Bank and AMP Bank GO hosts.
+- target: $.paths['/banking/products/{productId}'].get
+  update:
+    x-apievangelist-live: true

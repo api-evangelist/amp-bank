@@ -1,0 +1,60 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/amp-bank-cds-banking-products-openapi.yml (x-scopes per operation) + DSB Consumer Data Standards
+docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+summary: >-
+  OAuth 2.0 authorisation scopes governing the accredited CDR consumer
+  data-sharing surface (accounts, balances, transactions, direct debits,
+  scheduled payments, payees). These are the standard DSB Consumer Data
+  Standards banking scopes, declared per-operation in the OpenAPI via the
+  x-scopes extension. They apply to the FAPI 1.0 Advanced / OpenID Connect
+  authorisation flow brokered by an Accredited Data Recipient (ADR) - NOT to
+  the public, unauthenticated Product Reference Data (PRD) surface, which needs
+  no scope. See authentication/amp-bank-authentication.yml for the auth profile.
+flow:
+  grant: authorization_code (FAPI 1.0 Advanced, OIDC, PAR, PKCE, mTLS-bound tokens)
+  registry: CDR Register / Data Standards Body InfoSec profile
+scopes:
+- scope: bank:accounts.basic:read
+  description: >-
+    Read basic account information (account list, masked account numbers,
+    product category, balances) for accounts the consumer has authorised.
+  operations:
+  - listBankingAccounts
+  - listBankingBalancesBulk
+  - listBankingBalancesSpecificAccounts
+  - getBankingBalance
+- scope: bank:accounts.detail:read
+  description: >-
+    Read detailed account information (full account number, features, terms,
+    rates, addresses) for authorised accounts.
+  operations:
+  - getBankingAccountDetail
+- scope: bank:transactions:read
+  description: Read transaction data for authorised accounts.
+  operations:
+  - listBankingTransactions
+  - getBankingTransactionDetail
+- scope: bank:regular_payments:read
+  description: >-
+    Read direct debits, scheduled payments and instalment plans for authorised
+    accounts.
+  operations:
+  - listDirectDebits
+  - listDirectDebitsBulk
+  - listDirectDebitsSpecificAccounts
+  - listScheduledPayments
+  - listScheduledPaymentsBulk
+  - listScheduledPaymentsSpecificAccounts
+  - listInstalmentPlans
+  - listInstalmentPlansBulk
+- scope: bank:payees:read
+  description: Read the consumer's saved payee list for authorised accounts.
+  operations:
+  - listBankingPayees
+  - getBankingPayeeDetail
+note: >-
+  Scope descriptions follow the DSB Consumer Data Standards authorisation-scopes
+  reference. AMP Bank implements the standard CDR banking scope set; it does not
+  define bank-proprietary scopes. The PRD product endpoints (listBankingProducts,
+  getBankingProductDetail) require no scope.

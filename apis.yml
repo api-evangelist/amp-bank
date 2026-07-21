@@ -204,6 +204,8 @@ common:
   name: AMP responsible disclosure (HackerOne)
 - type: Authentication
   url: authentication/amp-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/amp-bank-scopes.yml
 - type: Conventions
   url: conventions/amp-bank-conventions.yml
 - type: ErrorCatalog

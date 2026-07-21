@@ -23,7 +23,7 @@ tags:
 - Product Reference Data
 - ADI
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
 - aid: amp-bank:amp-bank-cdr-product-reference-data-api
@@ -36,7 +36,7 @@ apis:
   - Australia
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
-  baseURL: https://api.cdr-api.amp.com.au/cds-au/v1
+  baseURL: https://api.cdr-api.amp.com.au/cds-au/v1/banking/products
   properties:
   - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
     type: Documentation
@@ -60,7 +60,7 @@ apis:
   - Australia
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
-  baseURL: https://pub.cdr-sme.amp.com.au/api/cds-au/v1
+  baseURL: https://pub.cdr-sme.amp.com.au/api/cds-au/v1/banking/products
   properties:
   - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
     type: Documentation
@@ -73,6 +73,111 @@ apis:
     939-900). Confirmed live returning HTTP 200 (x-v 4 and 5) with nine AMP Bank GO
     products including business save, everyday and term deposit accounts, conforming
     to the DSB Consumer Data Standards. Requires the CDS x-v version header; no authentication.
+- aid: amp-bank:amp-bank-cdr-accounts-balances-api
+  name: AMP Bank CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Accounts
+  - Balances
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+  baseURL: https://api.cdr.amp.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+    type: APIReference
+  - url: openapi/amp-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right banking-account surface implementing
+    the DSB Consumer Data Standards Get Accounts, Get Bulk Balances, Get Account Balance
+    and Get Account Detail endpoints (/banking/accounts, /banking/accounts/balances,
+    /banking/accounts/{accountId}/balance, /banking/accounts/{accountId}). These endpoints
+    are NOT public — they are reached over the AMP Bank data-holder host api.cdr.amp.com.au
+    (confirmed via 301 redirect from the public host) and require FAPI 1.0 Advanced
+    security, mutual TLS and a consumer authorization obtained through an accredited
+    Accredited Data Recipient (ADR) under the CDR regime. Standardized DSB shape, not
+    a bank-proprietary API.
+- aid: amp-bank:amp-bank-cdr-transactions-api
+  name: AMP Bank CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Transactions
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+  baseURL: https://api.cdr.amp.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+    type: APIReference
+  - url: openapi/amp-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right transactions surface implementing
+    the DSB Consumer Data Standards Get Transactions For Account and Get Transaction
+    Detail endpoints (/banking/accounts/{accountId}/transactions and /banking/accounts/{accountId}/transactions/{transactionId}).
+    Reached over the AMP Bank data-holder host api.cdr.amp.com.au and gated by FAPI
+    1.0 Advanced, mutual TLS and a consumer authorization brokered by an accredited
+    Accredited Data Recipient (ADR); it is not publicly callable. Standardized DSB
+    shape shared across all Australian ADIs, not a bank-proprietary API.
+- aid: amp-bank:amp-bank-cdr-direct-debits-scheduled-payments-api
+  name: AMP Bank CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+  baseURL: https://api.cdr.amp.com.au/cds-au/v1/banking/accounts/direct-debits
+  properties:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+    type: APIReference
+  - url: openapi/amp-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right payments-arrangement surface
+    implementing the DSB Consumer Data Standards Get Direct Debits For Account, Get
+    Bulk Direct Debits, Get Scheduled Payments For Account and Get Bulk Scheduled Payments
+    endpoints (/banking/accounts/{accountId}/direct-debits, /banking/accounts/direct-debits,
+    /banking/accounts/{accountId}/payments/scheduled, /banking/payments/scheduled).
+    Reached over the AMP Bank data-holder host api.cdr.amp.com.au and gated by FAPI
+    1.0 Advanced, mutual TLS and a consumer authorization brokered by an accredited
+    Accredited Data Recipient (ADR). Standardized DSB shape, not bank-proprietary.
+- aid: amp-bank:amp-bank-cdr-payees-api
+  name: AMP Bank CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Payees
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+  baseURL: https://api.cdr.amp.com.au/cds-au/v1/banking/payees
+  properties:
+  - url: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+    type: APIReference
+  - url: openapi/amp-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right payees surface implementing the
+    DSB Consumer Data Standards Get Payees and Get Payee Detail endpoints (/banking/payees
+    and /banking/payees/{payeeId}), exposing a customer's saved payee list where the
+    customer has authorized sharing. Reached over the AMP Bank data-holder host api.cdr.amp.com.au
+    and gated by FAPI 1.0 Advanced, mutual TLS and a consumer authorization brokered
+    by an accredited Accredited Data Recipient (ADR); not publicly callable. Standardized
+    DSB shape shared across all Australian ADIs, not a bank-proprietary API.
 common:
 - type: VulnerabilityDisclosure
   url: security/amp-bank-vulnerability-disclosure.yml

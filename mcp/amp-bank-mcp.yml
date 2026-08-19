@@ -2,19 +2,26 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/amp-bank-cds-banking-products-openapi.yml
-note: >-
-  No official AMP-hosted MCP server was found. This is a candidate tool list
-  derived from the publicly reachable, unauthenticated CDR Product Reference
-  Data operations (the live PRD surface). Each tool requires the CDS x-v
-  version header and no authentication.
+note: No official AMP-hosted MCP server was found. This is a candidate tool list derived from the publicly
+  reachable, unauthenticated CDR Product Reference Data operations (the live PRD surface). Each tool requires
+  the CDS x-v version header and no authentication.
 server:
   name: amp-bank
   transport: http
   url: null
 tools:
 - name: list_banking_products
-  description: List AMP Bank / AMP Bank GO products openly offered to the market (home loans, savings, term deposits, transaction accounts). Supports effective, updated-since, brand, product-category, page, page-size.
+  description: List AMP Bank / AMP Bank GO products openly offered to the market (home loans, savings,
+    term deposits, transaction accounts). Supports effective, updated-since, brand, product-category,
+    page, page-size.
   source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
 - name: get_banking_product_detail
-  description: Get full detail for a single product (features, constraints, eligibility, fees, deposit/lending rates) by productId.
+  description: Get full detail for a single product (features, constraints, eligibility, fees, deposit/lending
+    rates) by productId.
   source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+deployment:
+  mode: none
+  verified: derived
+  tools: 2
+  checked: '2026-08-12'
+  source: catalog MCP census

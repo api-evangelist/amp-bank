@@ -12,6 +12,18 @@ description: AMP Bank Limited is the retail and business banking arm of AMP Limi
   Reference Data (PRD) APIs conforming to the DSB Consumer Data Standards, alongside
   the accredited, FAPI-secured consumer data sharing surface used by authorised data
   recipients.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: open

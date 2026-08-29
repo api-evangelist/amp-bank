@@ -212,6 +212,9 @@ apis:
   - type: APIReference
     url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
 common:
+- type: CapabilityMap
+  url: capabilities/amp-bank-capability-edges.yml
+  name: AMP Bank Business Capability Map
 - type: VulnerabilityDisclosure
   url: security/amp-bank-vulnerability-disclosure.yml
 - type: DomainSecurity

@@ -1,0 +1,57 @@
+slug: amp-bank
+provider: AMP Bank
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Banking Products
+  spec_file: amp-bank-banking-products-api-openapi.yml
+  capability_id: BC-1310.10
+  capability_id_l1: BC-1310
+  capability_name: Product Catalogue Management
+  confidence: 0.85
+  evidence: GET /banking/products listBankingProducts 'Get Products'; schemas BankingProductV6, BankingProductFeeV2,
+    BankingProductDepositRateV2, BankingProductEligibilityV2, BankingProductBundle
+  reason: Publishes the bank's product master with fees, deposit rates, eligibility and bundles — a banking
+    product catalogue surface. Product parameters are also present, but the operations are catalogue listing/detail.
+- tag: Banking Account Balances
+  spec_file: amp-bank-banking-account-balances-api-openapi.yml
+  capability_id: BC-1330
+  capability_id_l1: BC-1330
+  capability_name: Deposits & Savings Management
+  confidence: 0.7
+  evidence: GET /banking/accounts/balances  Get Bulk Balances; GET /banking/accounts/{accountId}/balance  Get
+    Account Balance
+  reason: Consumer Data Right banking data-holder endpoints exposing deposit/transaction account balances
+    (BankingBalance, BankingBalancePurse) — account information for deposit and savings products; L1 only
+    as balances span several account types.
+- tag: Banking Account Scheduled Payments
+  spec_file: amp-bank-banking-account-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: GET /banking/payments/scheduled  Get Scheduled Payments Bulk; schemas BankingScheduledPaymentV2,
+    BankingDomesticPayeeAccount, BankingInternationalPayee, BankingInstalmentPlanId
+  reason: Scheduled payment instructions with payee details, recurrence rules and instalment plans — payment
+    instruction capture/authorisation data, i.e. Payment Initiation Management.
+- tag: Banking Accounts
+  spec_file: amp-bank-banking-accounts-api-openapi.yml
+  capability_id: BC-1330
+  capability_id_l1: BC-1330
+  capability_name: Deposits & Savings Management
+  confidence: 0.7
+  evidence: GET /banking/accounts  Get Accounts; schemas BankingAccountDetailV5, BankingTermDepositAccount,
+    BankingCreditCardAccount, BankingProductDepositRateV2
+  reason: Exposes the bank's account master data (deposit, term deposit, credit card accounts with rates
+    and fees) under CDR — deposit/account management information; L1 only since the accounts span deposit,
+    term deposit and card products.

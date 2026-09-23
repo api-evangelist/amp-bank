@@ -1,13 +1,7 @@
 {
   "provider": "amp-bank",
   "sources": [
-    "amp-bank-banking-account-balances-api-openapi.yml",
-    "amp-bank-banking-account-direct-debits-api-openapi.yml",
-    "amp-bank-banking-account-scheduled-payments-api-openapi.yml",
-    "amp-bank-banking-account-transactions-api-openapi.yml",
-    "amp-bank-banking-accounts-api-openapi.yml",
-    "amp-bank-banking-payees-api-openapi.yml",
-    "amp-bank-banking-products-api-openapi.yml"
+    "_original/amp-bank-cds-banking-products-openapi.yml"
   ],
   "outputs": [
     "amp-bank-banking-account-balances-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amp-bank-cds-banking-products-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "amp-bank-banking-account-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amp-bank-banking-account-direct-debits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amp-bank-banking-account-scheduled-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amp-bank-banking-account-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amp-bank-banking-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amp-bank-banking-payees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amp-bank-banking-products-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

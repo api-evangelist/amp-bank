@@ -432,15 +432,119 @@ paths:
       - bank:regular_payments:read
       x-version: '1'
 components:
-  requestBodies:
-    RequestAccountIds:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestAccountIdListV1'
-      description: Request payload containing a list of _accountId_ values to obtain data for.
-      required: true
   schemas:
+    RequestAccountIdListV1:
+      example:
+        data:
+          accountIds:
+          - null
+          - null
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/RequestAccountIdListV1_data'
+        meta:
+          type: object
+      required:
+      - data
+      type: object
+    LinksPaginated:
+      example:
+        next: next
+        last: last
+        prev: prev
+        self: self
+        first: first
+      properties:
+        self:
+          description: Fully qualified link that generated the current response document.
+          type: string
+          x-cds-type: URIString
+        first:
+          description: URI to the first page of this set. Mandatory if this response is not the first page.
+          type: string
+          x-cds-type: URIString
+        prev:
+          description: URI to the previous page of this set. Mandatory if this response is not the first page.
+          type: string
+          x-cds-type: URIString
+        next:
+          description: URI to the next page of this set. Mandatory if this response is not the last page.
+          type: string
+          x-cds-type: URIString
+        last:
+          description: URI to the last page of this set. Mandatory if this response is not the last page.
+          type: string
+          x-cds-type: URIString
+      required:
+      - self
+      type: object
+      x-conditional:
+      - prev
+      - next
+      - first
+      - last
+    ResponseBankingDirectDebitAuthorisationList_data:
+      example:
+        directDebitAuthorisations:
+        - lastDebitAmount: lastDebitAmount
+          accountId: ''
+          lastDebitDateTime: lastDebitDateTime
+          authorisedEntity:
+            arbn: arbn
+            description: description
+            financialInstitution: financialInstitution
+            abn: abn
+            acn: acn
+        - lastDebitAmount: lastDebitAmount
+          accountId: ''
+          lastDebitDateTime: lastDebitDateTime
+          authorisedEntity:
+            arbn: arbn
+            description: description
+            financialInstitution: financialInstitution
+            abn: abn
+            acn: acn
+      properties:
+        directDebitAuthorisations:
+          description: The list of authorisations returned.
+          items:
+            $ref: '#/components/schemas/BankingDirectDebit'
+          type: array
+      required:
+      - directDebitAuthorisations
+      type: object
+    RequestAccountIdListV1_data:
+      example:
+        accountIds:
+        - null
+        - null
+      properties:
+        accountIds:
+          description: Array of _accountId_ values to obtain data for.
+          items:
+            $ref: '#/components/schemas/BankingAccountId'
+          type: array
+      required:
+      - accountIds
+      type: object
+    BankingProductCategoryV2:
+      description: The category to which a product or account belongs. See [here](#product-categories) for more details.
+      enum:
+      - BUSINESS_LOANS
+      - BUY_NOW_PAY_LATER
+      - CRED_AND_CHRG_CARDS
+      - LEASES
+      - MARGIN_LOANS
+      - OVERDRAFTS
+      - PERS_LOANS
+      - REGULATED_TRUST_ACCOUNTS
+      - RESIDENTIAL_MORTGAGES
+      - TERM_DEPOSITS
+      - TRADE_FINANCE
+      - TRANS_AND_SAVINGS_ACCOUNTS
+      - TRAVEL_CARDS
+      type: string
     ErrorV2_meta:
       description: Additional data for customised error codes.
       properties:
@@ -493,42 +597,83 @@ components:
       - links
       - meta
       type: object
-    LinksPaginated:
-      example:
-        next: next
-        last: last
-        prev: prev
-        self: self
-        first: first
+    ResponseErrorListV2:
       properties:
-        self:
-          description: Fully qualified link that generated the current response document.
-          type: string
-          x-cds-type: URIString
-        first:
-          description: URI to the first page of this set. Mandatory if this response is not the first page.
-          type: string
-          x-cds-type: URIString
-        prev:
-          description: URI to the previous page of this set. Mandatory if this response is not the first page.
-          type: string
-          x-cds-type: URIString
-        next:
-          description: URI to the next page of this set. Mandatory if this response is not the last page.
-          type: string
-          x-cds-type: URIString
-        last:
-          description: URI to the last page of this set. Mandatory if this response is not the last page.
-          type: string
-          x-cds-type: URIString
+        errors:
+          description: List of errors.
+          items:
+            $ref: '#/components/schemas/ErrorV2'
+          type: array
       required:
-      - self
+      - errors
+      type: object
+    BankingAuthorisedEntity:
+      example:
+        arbn: arbn
+        description: description
+        financialInstitution: financialInstitution
+        abn: abn
+        acn: acn
+      properties:
+        description:
+          description: Description of the authorised entity derived from previously executed direct debits.
+          type: string
+        financialInstitution:
+          description: Name of the financial institution through which the direct debit will be executed. Is required unless the payment is made via a credit card scheme.
+          type: string
+        abn:
+          description: Australian Business Number for the authorised entity.
+          type: string
+        acn:
+          description: Australian Company Number for the authorised entity.
+          type: string
+        arbn:
+          description: Australian Registered Body Number for the authorised entity.
+          type: string
       type: object
       x-conditional:
-      - prev
-      - next
-      - first
-      - last
+      - financialInstitution
+    BankingAccountId:
+      description: A unique identifier for a Banking account, generated according to [CDR ID Permanence](#id-permanence) requirements.
+      type: string
+      x-cds-type: ASCIIString
+    MetaPaginated:
+      example:
+        totalRecords: 0
+        totalPages: 6
+      properties:
+        totalRecords:
+          description: The total number of records in the full set. See [pagination](#pagination).
+          type: integer
+          x-cds-type: NaturalNumber
+        totalPages:
+          description: The total number of pages in the full set. See [pagination](#pagination).
+          type: integer
+          x-cds-type: NaturalNumber
+      required:
+      - totalPages
+      - totalRecords
+      type: object
+    ErrorV2:
+      properties:
+        code:
+          description: The code of the error encountered. Where the error is specific to the respondent, an application-specific error code, expressed as a string value. If the error is application-specific, the URN code that the specific error extends must be provided in the _meta_ object. Otherwise, the value is the error code URN.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem that **MUST NOT** change from occurrence to occurrence of the problem represented by the error code.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ErrorV2_meta'
+      required:
+      - code
+      - detail
+      - title
+      type: object
+      x-conditional:
+      - meta
     BankingDirectDebit:
       example:
         lastDebitAmount: lastDebitAmount
@@ -559,159 +704,6 @@ components:
       - accountId
       - authorisedEntity
       type: object
-    BankingProductCategoryV2:
-      description: The category to which a product or account belongs. See [here](#product-categories) for more details.
-      enum:
-      - BUSINESS_LOANS
-      - BUY_NOW_PAY_LATER
-      - CRED_AND_CHRG_CARDS
-      - LEASES
-      - MARGIN_LOANS
-      - OVERDRAFTS
-      - PERS_LOANS
-      - REGULATED_TRUST_ACCOUNTS
-      - RESIDENTIAL_MORTGAGES
-      - TERM_DEPOSITS
-      - TRADE_FINANCE
-      - TRANS_AND_SAVINGS_ACCOUNTS
-      - TRAVEL_CARDS
-      type: string
-    BankingAuthorisedEntity:
-      example:
-        arbn: arbn
-        description: description
-        financialInstitution: financialInstitution
-        abn: abn
-        acn: acn
-      properties:
-        description:
-          description: Description of the authorised entity derived from previously executed direct debits.
-          type: string
-        financialInstitution:
-          description: Name of the financial institution through which the direct debit will be executed. Is required unless the payment is made via a credit card scheme.
-          type: string
-        abn:
-          description: Australian Business Number for the authorised entity.
-          type: string
-        acn:
-          description: Australian Company Number for the authorised entity.
-          type: string
-        arbn:
-          description: Australian Registered Body Number for the authorised entity.
-          type: string
-      type: object
-      x-conditional:
-      - financialInstitution
-    RequestAccountIdListV1_data:
-      example:
-        accountIds:
-        - null
-        - null
-      properties:
-        accountIds:
-          description: Array of _accountId_ values to obtain data for.
-          items:
-            $ref: '#/components/schemas/BankingAccountId'
-          type: array
-      required:
-      - accountIds
-      type: object
-    ErrorV2:
-      properties:
-        code:
-          description: The code of the error encountered. Where the error is specific to the respondent, an application-specific error code, expressed as a string value. If the error is application-specific, the URN code that the specific error extends must be provided in the _meta_ object. Otherwise, the value is the error code URN.
-          type: string
-        title:
-          description: A short, human-readable summary of the problem that **MUST NOT** change from occurrence to occurrence of the problem represented by the error code.
-          type: string
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.
-          type: string
-        meta:
-          $ref: '#/components/schemas/ErrorV2_meta'
-      required:
-      - code
-      - detail
-      - title
-      type: object
-      x-conditional:
-      - meta
-    ResponseBankingDirectDebitAuthorisationList_data:
-      example:
-        directDebitAuthorisations:
-        - lastDebitAmount: lastDebitAmount
-          accountId: ''
-          lastDebitDateTime: lastDebitDateTime
-          authorisedEntity:
-            arbn: arbn
-            description: description
-            financialInstitution: financialInstitution
-            abn: abn
-            acn: acn
-        - lastDebitAmount: lastDebitAmount
-          accountId: ''
-          lastDebitDateTime: lastDebitDateTime
-          authorisedEntity:
-            arbn: arbn
-            description: description
-            financialInstitution: financialInstitution
-            abn: abn
-            acn: acn
-      properties:
-        directDebitAuthorisations:
-          description: The list of authorisations returned.
-          items:
-            $ref: '#/components/schemas/BankingDirectDebit'
-          type: array
-      required:
-      - directDebitAuthorisations
-      type: object
-    ResponseErrorListV2:
-      properties:
-        errors:
-          description: List of errors.
-          items:
-            $ref: '#/components/schemas/ErrorV2'
-          type: array
-      required:
-      - errors
-      type: object
-    BankingAccountId:
-      description: A unique identifier for a Banking account, generated according to [CDR ID Permanence](#id-permanence) requirements.
-      type: string
-      x-cds-type: ASCIIString
-    RequestAccountIdListV1:
-      example:
-        data:
-          accountIds:
-          - null
-          - null
-        meta: '{}'
-      properties:
-        data:
-          $ref: '#/components/schemas/RequestAccountIdListV1_data'
-        meta:
-          type: object
-      required:
-      - data
-      type: object
-    MetaPaginated:
-      example:
-        totalRecords: 0
-        totalPages: 6
-      properties:
-        totalRecords:
-          description: The total number of records in the full set. See [pagination](#pagination).
-          type: integer
-          x-cds-type: NaturalNumber
-        totalPages:
-          description: The total number of pages in the full set. See [pagination](#pagination).
-          type: integer
-          x-cds-type: NaturalNumber
-      required:
-      - totalPages
-      - totalRecords
-      type: object
   headers:
     XV:
       description: The [payload version](#response-headers) that the endpoint has responded with.
@@ -727,3 +719,11 @@ components:
       schema:
         type: string
       style: simple
+  requestBodies:
+    RequestAccountIds:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestAccountIdListV1'
+      description: Request payload containing a list of _accountId_ values to obtain data for.
+      required: true

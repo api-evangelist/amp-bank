@@ -56,7 +56,7 @@ tags_raw:
 - Product Reference Data
 - ADI
 created: '2026-07-20'
-modified: '2026-07-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: amp-bank:amp-bank-banking-account-balances-api
@@ -221,6 +221,8 @@ apis:
   - type: APIReference
     url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
 common:
+- url: https://www.amp.com.au/about-amp/news
+  type: Blog
 - type: CapabilityMap
   url: capabilities/amp-bank-capability-edges.yml
   name: AMP Bank Business Capability Map

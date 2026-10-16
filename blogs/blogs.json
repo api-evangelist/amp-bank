@@ -1,0 +1,14 @@
+{
+  "repo": "amp-bank",
+  "feeds": [
+    {
+      "source": "https://www.amp.com.au/about-amp/news",
+      "feed_url": "https://www.amp.com.au/about-amp/news",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-10-10T13:15:00Z"
+}

@@ -1,0 +1,9 @@
+generated: '2026-10-20'
+method: none
+source: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+packages: []
+note: >-
+  No first-party SDK, client library or CLI is published or linked from AMP's
+  Open Banking API page, and the preflight found no AMP-owned GitHub org. The
+  DSB publishes community CDR tooling, but that is the standards body's, not
+  AMP's.

@@ -1,0 +1,59 @@
+name: AMP Bank rate limits
+generated: '2026-10-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/
+docs: https://consumerdatastandardsaustralia.github.io/standards/#traffic-thresholds
+note: >-
+  AMP does not publish its own rate limits. As a CDR data holder it is bound by
+  the DSB Consumer Data Standards non-functional requirements, whose Traffic
+  Thresholds section states: "Calls in excess of the following traffic
+  thresholds will be able to be freely throttled or rejected by a data holder
+  without impact to their performance or availability requirements." These are
+  the thresholds below which AMP must serve, not limits AMP has stated it
+  enforces. A live unauthenticated GET /banking/products on 2026-10-20 returned
+  no rate-limit headers.
+status_on_exhaustion: 429
+headers:
+- Retry-After
+limit_count: 8
+limits:
+- name: Public traffic (unauthenticated endpoints)
+  limit_text: 300 TPS total across all consumers (additive to secure traffic)
+  max: 300
+  window: 1 second
+  scope: per data holder (all consumers)
+  endpoint: unauthenticated endpoints (e.g. GET /banking/products)
+- name: Customer Present - per customer
+  limit_text: 10 TPS per customer
+  max: 10
+  window: 1 second
+  scope: per customer
+- name: Customer Present - per software product
+  limit_text: 50 TPS per Data Recipient Software Product
+  max: 50
+  window: 1 second
+  scope: per Data Recipient Software Product
+- name: Unattended - sessions per day (low traffic periods)
+  limit_text: 20 sessions per day, per customer, per Data Recipient Software Product
+  max: 20
+  window: 1 day
+  scope: per customer per Data Recipient Software Product
+- name: Unattended - calls per session (low traffic periods)
+  limit_text: 100 total calls per session
+  max: 100
+  scope: per session
+- name: Unattended - TPS per session (low traffic periods)
+  limit_text: 5TPS per session
+  max: 5
+  window: 1 second
+  scope: per session
+- name: Secure traffic - 0 to 10,000 active authorisations
+  limit_text: For Data Holders with 0 to 10,000 active authorisations, 150 peak TPS total across all consumers
+  max: 150
+  window: 1 second
+  scope: per data holder (all consumers)
+- name: Secure traffic - more than 60,000 active authorisations
+  limit_text: For Data Holders with more than 60,000 active authorisations, 450 peak TPS total across all consumers
+  max: 450
+  window: 1 second
+  scope: per data holder (all consumers)

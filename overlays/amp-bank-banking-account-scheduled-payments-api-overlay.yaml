@@ -1,0 +1,39 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Banking Banking Account Scheduled Payments API (AMP Bank)
+  version: 1.0.0
+extends: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: amp-bank
+    x-apievangelist-regime: Consumer Data Right (CDR) - Australia, Consumer Data Standards Banking
+    x-apievangelist-authenticated: true
+    x-apievangelist-required-headers:
+    - x-v
+- target: $.info
+  update:
+    x-apievangelist-note: Server URL in the contract is the CDS example placeholder (mtls.dh.example.com). AMP's authenticated
+      data-holder base URI is published to accredited data recipients through the CDR Register, not on a public page.
+- target: $.paths['/banking/accounts/{accountId}/payments/scheduled'].get
+  update:
+    x-apievangelist-mcp-tool: list_scheduled_payments
+    x-apievangelist-read-only: true
+- target: $.paths['/banking/payments/scheduled'].get
+  update:
+    x-apievangelist-mcp-tool: list_scheduled_payments_bulk
+    x-apievangelist-read-only: true
+- target: $.paths['/banking/payments/scheduled'].post
+  update:
+    x-apievangelist-mcp-tool: list_scheduled_payments_specific_accounts
+    x-apievangelist-read-only: true
+- target: $.paths['/banking/accounts/{accountId}/payments/plans'].get
+  update:
+    x-apievangelist-mcp-tool: list_instalment_plans
+    x-apievangelist-read-only: true
+- target: $.paths['/banking/accounts/payments/plans'].get
+  update:
+    x-apievangelist-mcp-tool: list_instalment_plans_bulk
+    x-apievangelist-read-only: true

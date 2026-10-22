@@ -1,0 +1,148 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 11
+  own: 6
+  other_domain: 3
+  platform: 2
+  roles:
+  - api
+  - identity
+  - other
+  - website
+hosts:
+- host: api.cdr-api.amp.com.au
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: amp.com.au
+  role: api
+  relation: own
+- host: api.com.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.com.au
+  role: api
+  relation: other-domain
+- host: api.hackerone.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: hackerone.com
+  role: api
+  relation: other-domain
+- host: consumerdatastandardsaustralia.github.io
+  found_by:
+  - pointer
+  types:
+  - Deprecation
+  serves: []
+  registrable_domain: github.io
+  role: other
+  relation: platform
+- host: hackerone.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - HackerOne
+  serves: []
+  registrable_domain: hackerone.com
+  role: other
+  relation: other-domain
+- host: portal.amp.com.au
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: amp.com.au
+  role: other
+  relation: own
+- host: pub.cdr-sme.amp.com.au
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: amp.com.au
+  role: other
+  relation: own
+- host: secure.amp.com.au
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  - vendor-detect
+  types:
+  - Login
+  serves:
+  - cdn
+  vendor: imperva
+  registrable_domain: amp.com.au
+  role: identity
+  relation: own
+- host: super.amp.com.au
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: amp.com.au
+  role: other
+  relation: own
+- host: www.amp.com.au
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Pricing
+  - Newsroom
+  - Blog
+  - Website
+  - Documentation
+  - DeveloperPortal
+  - GettingStarted
+  - TermsOfService
+  - PrivacyPolicy
+  - Support
+  - Security
+  serves:
+  - docs
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: amp.com.au
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

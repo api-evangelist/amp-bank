@@ -1,4 +1,4 @@
-generated: '2026-07-20'
+generated: '2026-10-20'
 method: derived
 source: openapi/amp-bank-cds-banking-products-openapi.yml + DSB Consumer Data Standards
 summary: >-
@@ -22,6 +22,7 @@ versioning:
   unsupported: 406 Not Acceptable when no requested version is supported
   cross_link: lifecycle/amp-bank-lifecycle.yml
 idempotency:
+  coverage: na
   supported: false
   note: >-
     The captured surface is read-only (GET only), so no idempotency-key contract
@@ -61,8 +62,28 @@ error_envelope:
   code_namespace: urn:au-cds:error:cds-all / urn:au-cds:error:cds-banking
   cross_link: errors/amp-bank-problem-types.yml
 rate_limit_signaling:
-  documented: false
-  note: The DSB standards define traffic-thresholds for authenticated CDR calls; PRD signalling is not published in the OpenAPI.
+  documented: true
+  status_on_exhaustion: 429
+  headers:
+  - Retry-After
+  note: >-
+    The DSB Consumer Data Standards state "Throttling is a NFR. The data holder
+    should include a Retry-After header in the response" for 429 Too Many
+    Requests. A live unauthenticated GET /banking/products (x-v 4, probed
+    2026-10-20) returned no X-RateLimit-* / RateLimit-* headers.
+  cross_link: rate-limits/amp-bank-rate-limits.yml
+request_id:
+  header: x-fapi-interaction-id
+  note: >-
+    Observed on a live GET https://api.cdr-api.amp.com.au/cds-au/v1/banking/products
+    response (2026-10-20); CORS also allows X-Request-Id, x-v, x-min-v and
+    x-fapi-interaction-id request headers.
+reversibility:
+  applicable: na
+  note: >-
+    Every operation in the captured CDR banking contracts is a GET (read-only
+    data sharing / product reference data). There is no write surface, so
+    reversal, dry-run and idempotency are not applicable.
 data_conventions:
   dates: ISO 8601 DateTimeString / DateString (x-cds-type extensions)
   amounts: AmountString (string-encoded decimal)

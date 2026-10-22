@@ -1,0 +1,18 @@
+name: AMP Bank pricing
+generated: '2026-10-20'
+method: none
+source: https://www.amp.com.au/personal-banking/open-banking/open-banking-api
+audience: unclear
+pricing_basis: none
+published: false
+plan_count: 0
+plans: []
+delivery:
+  model: managed
+note: >-
+  AMP publishes no API plans or pricing. Its Open Banking API page describes the
+  Product Reference Data APIs with "Authentication Public" and lists no tiers or
+  fees; the accredited CDR data-sharing surface is a regulatory obligation
+  accessed by accredited data recipients, not a sold product. The site's
+  "Pricing and performance" link (https://www.amp.com.au/investments/pricing-and-performance)
+  is investment unit pricing, a consumer product page, not API pricing.

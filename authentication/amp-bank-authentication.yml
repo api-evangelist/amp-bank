@@ -1,21 +1,58 @@
-generated: '2026-07-20'
-method: derived
-source: openapi/amp-bank-cds-banking-products-openapi.yml
+generated: '2026-10-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/
+docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
 summary:
-  types: []
-  authenticated: false
+  types:
+  - none
+  - oauth2
+  - openIdConnect
+  - mutualTLS
+  authenticated: partial
   note: >-
-    The AMP Bank and AMP Bank GO surfaces captured in this repo are the CDR
-    Product Reference Data (PRD) endpoints (GET /banking/products and
-    /banking/products/{productId}). Per the DSB Consumer Data Standards, PRD is
-    a public, unauthenticated surface - the OpenAPI declares no securitySchemes
-    and requires no credential. The only mandatory request signalling is the
-    x-v (and optional x-min-v) CDS version header, not an auth header.
-schemes: []
-context:
-  regime: Consumer Data Right (CDR / Open Banking) - Australia
-  authenticated_surface: >-
-    The accredited consumer data sharing (non-PRD) surface, which is out of scope
-    of this published spec, is secured per the CDR Register/InfoSec profile:
-    FAPI 1.0 Advanced, OpenID Connect, OAuth 2.0, PAR, PKCE and mutual-TLS
-    sender-constrained tokens. AMP does not expose that surface as public OpenAPI.
+    AMP publishes no authentication docs of its own; as a CDR data holder its
+    API security is defined by the DSB Consumer Data Standards (CDS) Security
+    Profile, which binds every data holder. The public Product Reference Data
+    (PRD) endpoints (GET /banking/products, /banking/products/{productId}) are
+    unauthenticated - the OpenAPI in openapi/ declares no securitySchemes and
+    requires only the x-v version header. The consumer data sharing endpoints
+    (accounts, balances, transactions, direct debits, scheduled payments,
+    payees) are reachable only by accredited data recipients through the CDS
+    FAPI flow below. The OpenAPI files in this repo declare no securitySchemes
+    for those endpoints (derive-authentication.py found 0 on 2026-10-20), so
+    the schemes below come from the CDS text, not the contract. Probe
+    2026-10-20: https://api.cdr-api.amp.com.au/.well-known/openid-configuration
+    returned 403 (not publicly readable from here).
+schemes:
+- name: none (Product Reference Data)
+  type: none
+  description: Public CDR PRD endpoints require no credential; only x-v (required) and x-min-v (optional) headers.
+  sources:
+  - openapi/amp-bank-banking-products-api-openapi.yml
+- name: cds-fapi-oauth2-oidc
+  type: oauth2
+  flow: authorization_code
+  description: >-
+    Consumer data sharing under the CDS Security Profile. Verbatim: "Data
+    Holders MUST support FAPI 1.0 Advanced Profile [FAPI-1.0-Advanced] . Data
+    Holders MUST support Authorization Code Flow." and "Data Holders MUST
+    support Pushed Authorisation Requests (PAR) via the pushed authorisation
+    endpoint according to [PAR] . Data Holders MUST support [RFC9126] (PAR)
+    using [PKCE] ( [RFC7636] ) with S256 as the code challenge method".
+  scopes_ref: scopes/amp-bank-scopes.yml
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+- name: cds-client-authentication
+  type: private_key_jwt
+  description: >-
+    Data recipient client authentication. Verbatim: "private_key_jwt
+    authentication using client_credentials authorisation grant flow according
+    to Private Key JWT Client Authentication".
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+- name: cds-mtls
+  type: mutualTLS
+  description: >-
+    Mutual TLS client authentication and certificate-bound access tokens
+    (RFC 8705); CDS discovery metadata requires tls_client_certificate_bound_access_tokens,
+    "Boolean value indicating server support for mutual TLS client certificate
+    bound access tokens."
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile

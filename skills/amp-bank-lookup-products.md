@@ -1,7 +1,7 @@
 ---
-name: Look up AMP Bank products (CDR PRD)
+name: amp-bank-lookup-products
 description: Retrieve and inspect AMP Bank / AMP Bank GO banking products via the public, unauthenticated Consumer Data Right Product Reference Data API.
-api: openapi/amp-bank-cds-banking-products-openapi.yml
+api: openapi/amp-bank-banking-products-api-openapi.yml
 operations: [listBankingProducts, getBankingProductDetail]
 ---
 

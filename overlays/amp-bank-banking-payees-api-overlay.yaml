@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Banking Banking Payees API (AMP Bank)
+  version: 1.0.0
+extends: openapi/amp-bank-banking-payees-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: amp-bank
+    x-apievangelist-regime: Consumer Data Right (CDR) - Australia, Consumer Data Standards Banking
+    x-apievangelist-authenticated: true
+    x-apievangelist-required-headers:
+    - x-v
+- target: $.info
+  update:
+    x-apievangelist-note: Server URL in the contract is the CDS example placeholder (mtls.dh.example.com). AMP's authenticated
+      data-holder base URI is published to accredited data recipients through the CDR Register, not on a public page.
+- target: $.paths['/banking/payees'].get
+  update:
+    x-apievangelist-mcp-tool: list_banking_payees
+    x-apievangelist-read-only: true
+- target: $.paths['/banking/payees/{payeeId}'].get
+  update:
+    x-apievangelist-mcp-tool: get_banking_payee_detail
+    x-apievangelist-read-only: true

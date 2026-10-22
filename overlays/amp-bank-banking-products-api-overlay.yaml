@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Banking Banking Products API (AMP Bank)
+  version: 1.0.0
+extends: openapi/amp-bank-banking-products-api-openapi.yml
+generated: '2026-10-20'
+method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: amp-bank
+    x-apievangelist-regime: Consumer Data Right (CDR) - Australia, Consumer Data Standards Banking
+    x-apievangelist-authenticated: false
+    x-apievangelist-required-headers:
+    - x-v
+- target: $.servers
+  update:
+  - url: https://api.cdr-api.amp.com.au/cds-au/v1
+    description: AMP Bank (My AMP) public PRD host
+  - url: https://pub.cdr-sme.amp.com.au/api/cds-au/v1
+    description: AMP Bank GO public PRD host (the /api/ prefix answers; the path without it returned HTTP 404 on 2026-10-20)
+- target: $.paths['/banking/products'].get
+  update:
+    x-apievangelist-mcp-tool: list_banking_products
+    x-apievangelist-read-only: true
+- target: $.paths['/banking/products/{productId}'].get
+  update:
+    x-apievangelist-mcp-tool: get_banking_product_detail
+    x-apievangelist-read-only: true

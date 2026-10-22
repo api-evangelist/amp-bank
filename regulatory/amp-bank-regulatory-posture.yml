@@ -1,0 +1,72 @@
+generated: '2026-10-20'
+method: searched
+source: https://www.amp.com.au/privacy
+pages_read:
+- url: https://www.amp.com.au/privacy
+  http_status: 200
+  note: Summary page; links the full Privacy Policy, CDR Policy and Credit Reporting Policy PDFs read below.
+- url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/amp-privacy-policy-statement.pdf
+  http_status: 200
+- url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/consumer-data-right-policy.pdf
+  http_status: 200
+- url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/credit-reporting-policy.pdf
+  http_status: 200
+- url: https://www.amp.com.au/terms-and-conditions
+  http_status: 200
+  note: Website terms; no regulatory signal beyond Australia-only access.
+signals:
+  data_subject_request:
+    url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/credit-reporting-policy.pdf
+    section: '8. Access and Correction'
+    stated_sla: 'Credit information: access usually within 30 days; CDR consumer data correction: aim within 10 business days'
+    rights_named: [access, correction]
+    evidence:
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/credit-reporting-policy.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'An individual may contact AMP Bank to access his or her Credit Eligibility Information. ... Access will usually be provided within 30 days and in a format that is clear and accessible.'
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/consumer-data-right-policy.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'We will then aim to correct consumer data within 10 business days, after which we will respond to your request in writing detailing whether the correction was made, and if not, providing the reasons why, in addition to the options available to you to escalate the matter.'
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/consumer-data-right-policy.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'You can also ask us for access to your personal information that is also CDR data by making a request directly to us in accordance with our Privacy Policy.'
+    note: >-
+      Access and correction rights under the Australian Privacy Act / CR Code and the Consumer Data Right,
+      with stated response periods. Deletion and portability are not named as request rights (CDR data
+      sharing to accredited recipients is the portability analogue). Requests are by phone/mail/contact, not an API.
+  data_residency:
+    url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/amp-privacy-policy-statement.pdf
+    section: 'Do we send personal information to overseas recipients?'
+    evidence:
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/amp-privacy-policy-statement.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'This means that your information might end up stored or accessed in overseas countries, including Bahrain, China, countries within the European Union, Hong Kong, India, Japan, Malaysia, Mauritius, New Zealand, Philippines, Singapore, United Kingdom and United States.'
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/credit-reporting-policy.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'AMP Bank may from time to time disclose Credit-Related Personal Information to third party service providers located overseas.'
+    note: >-
+      A disclosure of overseas storage/access locations, not a residency commitment: data may leave Australia
+      to the listed countries. No in-region guarantee is offered.
+  incident_notification:
+    url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/amp-privacy-policy-statement.pdf
+    section: 'How do we protect your personal information?'
+    evidence:
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/amp-privacy-policy-statement.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'In the unlikely event of a data breach we have measures in place to manage and respond to data breaches, which includes the notification to impacted individuals and data protection authorities globally, where required.'
+    note: Commits to breach notification to individuals and regulators "where required"; no timeline stated.
+  data_retention:
+    url: https://www.amp.com.au/content/dam/amp-2024/documents/policies/credit-reporting-policy.pdf
+    section: '7. Holding Credit-Related Personal information'
+    evidence:
+    - source: https://www.amp.com.au/content/dam/amp-2024/documents/policies/credit-reporting-policy.pdf
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: 'When Personal Information is no longer required and if permitted by law, we will destroy or delete it from our systems in a secure manner, or de-identify this information.'
+    note: A purpose-limited retention principle (destroy/delete/de-identify when no longer required); no retention periods are stated.

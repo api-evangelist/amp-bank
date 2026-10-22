@@ -27,4 +27,13 @@ sla:
     CDR data holders are subject to DSB availability and performance
     requirements (non-functional requirements / traffic thresholds); AMP does
     not publish a separate public status page for the PRD surface.
+  discovery_endpoints:
+  - url: https://api.cdr-api.amp.com.au/cds-au/v1/discovery/status
+    probed: '2026-10-20'
+    status: 503
+    body: urn:au-cds:error:cds-all:Service/Unavailable (x-v 1 and 2)
+  - url: https://api.cdr-api.amp.com.au/cds-au/v1/discovery/outages
+    probed: '2026-10-20'
+    status: 503
+    body: urn:au-cds:error:cds-all:Service/Unavailable (x-v 1 and 2)
 deprecated_operations: []

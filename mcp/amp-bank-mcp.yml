@@ -1,27 +1,139 @@
-generated: '2026-07-20'
+name: AMP Bank MCP server (candidate)
+generated: '2026-10-20'
 method: derived
 status: candidate
-source: openapi/amp-bank-cds-banking-products-openapi.yml
-note: No official AMP-hosted MCP server was found. This is a candidate tool list derived from the publicly
-  reachable, unauthenticated CDR Product Reference Data operations (the live PRD surface). Each tool requires
-  the CDS x-v version header and no authentication.
-server:
-  name: amp-bank
-  transport: http
-  url: null
-tools:
-- name: list_banking_products
-  description: List AMP Bank / AMP Bank GO products openly offered to the market (home loans, savings,
-    term deposits, transaction accounts). Supports effective, updated-since, brand, product-category,
-    page, page-size.
-  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#listBankingProducts
-- name: get_banking_product_detail
-  description: Get full detail for a single product (features, constraints, eligibility, fees, deposit/lending
-    rates) by productId.
-  source_operation: openapi/amp-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+source:
+- openapi/amp-bank-banking-account-balances-api-openapi.yml
+- openapi/amp-bank-banking-account-direct-debits-api-openapi.yml
+- openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml
+- openapi/amp-bank-banking-account-transactions-api-openapi.yml
+- openapi/amp-bank-banking-accounts-api-openapi.yml
+- openapi/amp-bank-banking-payees-api-openapi.yml
+- openapi/amp-bank-banking-products-api-openapi.yml
+note: No official AMP-hosted MCP server, stdio package or llms.txt was found (web search 2026-10-20; www.amp.com.au/llms.txt
+  HTTP 404; api.cdr-api.amp.com.au/mcp HTTP 403 with an identical 403 control path, i.e. opaque, not an MCP endpoint). This
+  is a candidate tool list derived 1:1 from the CDR Banking OpenAPI operations saved in this repo. Only the two Product Reference
+  Data tools are callable without credentials; the account-data tools require CDR accreditation and customer consent.
 deployment:
   mode: none
+  auth: unknown
   verified: derived
-  tools: 2
-  checked: '2026-08-12'
-  source: catalog MCP census
+server:
+  name: amp-bank
+  transport: null
+  url: null
+tools:
+- name: list_banking_balances_bulk
+  description: Get Bulk Balances
+  source_operation: openapi/amp-bank-banking-account-balances-api-openapi.yml#listBankingBalancesBulk
+  method: GET
+  path: /banking/accounts/balances
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_banking_balances_specific_accounts
+  description: Get Balances For Specific Accounts
+  source_operation: openapi/amp-bank-banking-account-balances-api-openapi.yml#listBankingBalancesSpecificAccounts
+  method: POST
+  path: /banking/accounts/balances
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: get_banking_balance
+  description: Get Account Balance
+  source_operation: openapi/amp-bank-banking-account-balances-api-openapi.yml#getBankingBalance
+  method: GET
+  path: /banking/accounts/{accountId}/balance
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_direct_debits
+  description: Get Direct Debits For Account
+  source_operation: openapi/amp-bank-banking-account-direct-debits-api-openapi.yml#listDirectDebits
+  method: GET
+  path: /banking/accounts/{accountId}/direct-debits
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_direct_debits_bulk
+  description: Get Bulk Direct Debits
+  source_operation: openapi/amp-bank-banking-account-direct-debits-api-openapi.yml#listDirectDebitsBulk
+  method: GET
+  path: /banking/accounts/direct-debits
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_direct_debits_specific_accounts
+  description: Get Direct Debits For Specific Accounts
+  source_operation: openapi/amp-bank-banking-account-direct-debits-api-openapi.yml#listDirectDebitsSpecificAccounts
+  method: POST
+  path: /banking/accounts/direct-debits
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_scheduled_payments
+  description: Get Scheduled Payments for Account
+  source_operation: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml#listScheduledPayments
+  method: GET
+  path: /banking/accounts/{accountId}/payments/scheduled
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_scheduled_payments_bulk
+  description: Get Scheduled Payments Bulk
+  source_operation: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml#listScheduledPaymentsBulk
+  method: GET
+  path: /banking/payments/scheduled
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_scheduled_payments_specific_accounts
+  description: Get Scheduled Payments For Specific Accounts
+  source_operation: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml#listScheduledPaymentsSpecificAccounts
+  method: POST
+  path: /banking/payments/scheduled
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_instalment_plans
+  description: Get Instalment Plans for Account
+  source_operation: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml#listInstalmentPlans
+  method: GET
+  path: /banking/accounts/{accountId}/payments/plans
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_instalment_plans_bulk
+  description: Get Instalment Plans Bulk
+  source_operation: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml#listInstalmentPlansBulk
+  method: GET
+  path: /banking/accounts/payments/plans
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_banking_transactions
+  description: Get Transactions For Account
+  source_operation: openapi/amp-bank-banking-account-transactions-api-openapi.yml#listBankingTransactions
+  method: GET
+  path: /banking/accounts/{accountId}/transactions
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: get_banking_transaction_detail
+  description: Get Transaction Detail
+  source_operation: openapi/amp-bank-banking-account-transactions-api-openapi.yml#getBankingTransactionDetail
+  method: GET
+  path: /banking/accounts/{accountId}/transactions/{transactionId}
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_banking_accounts
+  description: Get Accounts
+  source_operation: openapi/amp-bank-banking-accounts-api-openapi.yml#listBankingAccounts
+  method: GET
+  path: /banking/accounts
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: get_banking_account_detail
+  description: Get Account Detail
+  source_operation: openapi/amp-bank-banking-accounts-api-openapi.yml#getBankingAccountDetail
+  method: GET
+  path: /banking/accounts/{accountId}
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_banking_payees
+  description: Get Payees
+  source_operation: openapi/amp-bank-banking-payees-api-openapi.yml#listBankingPayees
+  method: GET
+  path: /banking/payees
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: get_banking_payee_detail
+  description: Get Payee Detail
+  source_operation: openapi/amp-bank-banking-payees-api-openapi.yml#getBankingPayeeDetail
+  method: GET
+  path: /banking/payees/{payeeId}
+  auth: 'CDR consent: mTLS + FAPI OAuth2 access token, accredited data recipients only'
+- name: list_banking_products
+  description: Get Products
+  source_operation: openapi/amp-bank-banking-products-api-openapi.yml#listBankingProducts
+  method: GET
+  path: /banking/products
+  auth: none (public CDR Product Reference Data; x-v header required)
+- name: get_banking_product_detail
+  description: Get Product Detail
+  source_operation: openapi/amp-bank-banking-products-api-openapi.yml#getBankingProductDetail
+  method: GET
+  path: /banking/products/{productId}
+  auth: none (public CDR Product Reference Data; x-v header required)

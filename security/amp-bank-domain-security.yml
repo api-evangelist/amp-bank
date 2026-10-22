@@ -1,4 +1,4 @@
-generated: '2026-07-20'
+generated: '2026-10-20'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -16,18 +16,18 @@ hosts:
 - host: pub.cdr-sme.amp.com.au
   https: true
   tls_version: TLSv1.3
-  cert_expires: Dec  6 23:59:59 2026 GMT
+  cert_expires: Apr 23 23:59:59 2027 GMT
   hsts: null
 domains:
 - domain: amp.com.au
   dnssec: true
   caa:
+  - 0 issuewild "ssl.com"
   - 0 issue "amazon.com"
   - 0 issue "comodoca.com"
   - 0 issue "digicert.com; cansignhttpexchanges=yes"
   - 0 issue "globalsign.com"
   - 0 issue "letsencrypt.org"
-  - 0 issue "pki.goog; cansignhttpexchanges=yes"
   spf: true
   dmarc: true
   dmarc_policy: quarantine

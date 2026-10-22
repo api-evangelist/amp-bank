@@ -1,7 +1,25 @@
-generated: '2026-07-20'
+name: AMP Bank agent skills
+generated: '2026-10-20'
 method: generated
+source: openapi/
 skills:
 - file: amp-bank-lookup-products.md
-  name: Look up AMP Bank products (CDR PRD)
-  api: openapi/amp-bank-cds-banking-products-openapi.yml
+  name: amp-bank-lookup-products
+  api: openapi/amp-bank-banking-products-api-openapi.yml
   operations: [listBankingProducts, getBankingProductDetail]
+- file: amp-bank-read-account-balances.md
+  name: amp-bank-read-account-balances
+  api: openapi/amp-bank-banking-accounts-api-openapi.yml
+  operations: [listBankingAccounts, getBankingAccountDetail, listBankingBalancesBulk, listBankingBalancesSpecificAccounts, getBankingBalance]
+- file: amp-bank-review-transactions.md
+  name: amp-bank-review-transactions
+  api: openapi/amp-bank-banking-account-transactions-api-openapi.yml
+  operations: [listBankingTransactions, getBankingTransactionDetail]
+- file: amp-bank-review-regular-payments.md
+  name: amp-bank-review-regular-payments
+  api: openapi/amp-bank-banking-account-scheduled-payments-api-openapi.yml
+  operations: [listDirectDebits, listDirectDebitsBulk, listDirectDebitsSpecificAccounts, listScheduledPayments, listScheduledPaymentsBulk, listScheduledPaymentsSpecificAccounts, listInstalmentPlans, listInstalmentPlansBulk]
+- file: amp-bank-list-payees.md
+  name: amp-bank-list-payees
+  api: openapi/amp-bank-banking-payees-api-openapi.yml
+  operations: [listBankingPayees, getBankingPayeeDetail]

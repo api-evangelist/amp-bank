@@ -1,4 +1,4 @@
-# AMP Bank (amp-bank)
+# AMP Bank
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,86 +64,192 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-AMP Bank Limited is the retail and business banking arm of AMP Limited (ASX:AMP), a diversified Australian financial services group operating since 1849 and headquartered in Sydney. AMP Bank is a publicly listed (shareholder-owned, not a mutual) authorised deposit-taking institution (ADI) regulated by APRA, offering home loans, deposit and savings accounts, and the digital AMP Bank GO small-business and everyday banking brand. As an active ADI, AMP participates in Australia's Consumer Data Right (CDR / Open Banking) regime and exposes public, unauthenticated Product Reference Data (PRD) APIs conforming to the DSB Consumer Data Standards.
+AMP Bank Limited is the retail and business banking arm of AMP Limited (ASX:AMP), a diversified Australian financial services group operating since 1849 and headquartered in Sydney. AMP Bank is a publicly listed (shareholder-owned, not a mutual) authorised deposit-taking institution (ADI) regulated by APRA, offering home loans, deposit and savings accounts, and the digital AMP Bank GO small-business and everyday banking brand. As an active ADI, AMP participates in Australia's Consumer Data Right (CDR / Open Banking) regime and exposes public, unauthenticated Product Reference Data (PRD) APIs conforming to the DSB Consumer Data Standards, alongside the accredited, FAPI-secured consumer data sharing surface used by authorised data recipients.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amp-bank/refs/heads/main/apis.yml)
+**Areas:** Finance · Banks · Open Banking · CDR · Consumer Banking · Australia · Product Reference Data · ADI
 
-## Tags
+## AMP Bank on APIs.io
 
-- Financial
-- Banks
-- Open Banking
-- CDR
-- Consumer Banking
-- Australia
-- Product Reference Data
-- ADI
+Everything profiled for AMP Bank is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amp-bank/](https://apis.io/providers/amp-bank/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (8)
 
-- **Created:** 2026-07-20
-- **Modified:** 2026-07-20
+- [AMP Bank Banking Account Balances API](https://apis.io/apis/amp-bank/amp-bank-banking-account-balances-api/) — Banking Account Balance endpoints
+- [AMP Bank Banking Account Direct Debits API](https://apis.io/apis/amp-bank/amp-bank-banking-account-direct-debits-api/) — Banking Account Direct Debit endpoints
+- [AMP Bank Banking Account Scheduled Payments API](https://apis.io/apis/amp-bank/amp-bank-banking-account-scheduled-payments-api/) — Banking Account Scheduled Payment endpoints
+- [AMP Bank Banking Account Transactions API](https://apis.io/apis/amp-bank/amp-bank-banking-account-transactions-api/) — Banking Account Transaction endpoints
+- [AMP Bank Banking Accounts API](https://apis.io/apis/amp-bank/amp-bank-banking-accounts-api/) — Banking Account endpoints
+- [AMP Bank Banking Payees API](https://apis.io/apis/amp-bank/amp-bank-banking-payees-api/) — Banking Payee endpoints
+- [AMP Bank GO Banking Products API](https://apis.io/apis/amp-bank/amp-bank-go-banking-products-api/) — Public Consumer Data Right Product Reference Data endpoints (GET /banking/products and /banking/products/{productId}) for the AMP Bank - Mobile banking (AMP…
+- [AMP Bank Banking Products API](https://apis.io/apis/amp-bank/amp-bank-banking-products-api/) — Banking Product endpoints
 
-## APIs
+### Published properties
 
-### AMP Bank CDR Product Reference Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Public, unauthenticated Consumer Data Right Product Reference Data (PRD) API for the My AMP retail banking brand (BSB 939-200). Serves `GET /banking/products` and `/banking/products/{productId}` conforming to the DSB Consumer Data Standards. Confirmed live returning HTTP 200 (x-v 4) with eight AMP Bank products including home loans, savings and term deposits. Requires the CDS `x-v` version header; no authentication.
+#### MCP servers (1)
 
-- **Human URL:** [https://www.amp.com.au/personal-banking/open-banking/open-banking-api](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
-- **Base URL:** `https://api.cdr-api.amp.com.au/cds-au/v1`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [amp-bank](https://apis.io/servers/amp-bank/amp-bank/)
 
-- CDR
-- Open Banking
-- Product Reference Data
-- Banking
-- Australia
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
-- [API Reference](https://consumerdatastandardsaustralia.github.io/standards/#get-products)
-- [OpenAPI](openapi/amp-bank-cds-banking-products-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Amp Bank Agentic Access](https://apis.io/agentic-access/amp-bank/amp-bank-agentic-access/)
 
-### AMP Bank GO CDR Product Reference Data API
+#### JSON Schema (13)
 
-Public, unauthenticated Consumer Data Right Product Reference Data (PRD) API for the AMP Bank GO digital small-business and everyday banking brand (BSB 939-900). Confirmed live returning HTTP 200 (x-v 4 and 5) with nine AMP Bank GO products including business save, everyday and term deposit accounts, conforming to the DSB Consumer Data Standards. Requires the CDS `x-v` version header; no authentication.
+The data models the API reads and writes.
 
-- **Human URL:** [https://www.amp.com.au/personal-banking/open-banking/open-banking-api](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
-- **Base URL:** `https://pub.cdr-sme.amp.com.au/api/cds-au/v1`
+- [ResponseBankingAccountByIdV5](https://apis.io/schemas/amp-bank/amp-bank-response-banking-account-by-id-v5/)
+- [ResponseBankingAccountListV3](https://apis.io/schemas/amp-bank/amp-bank-response-banking-account-list-v3/)
+- [ResponseBankingAccountsBalanceById](https://apis.io/schemas/amp-bank/amp-bank-response-banking-accounts-balance-by-id/)
+- [ResponseBankingAccountsBalanceList](https://apis.io/schemas/amp-bank/amp-bank-response-banking-accounts-balance-list/)
+- [ResponseBankingDirectDebitAuthorisationList](https://apis.io/schemas/amp-bank/amp-bank-response-banking-direct-debit-authorisation-list/)
+- [ResponseBankingInstalmentPlanList](https://apis.io/schemas/amp-bank/amp-bank-response-banking-instalment-plan-list/)
+- [ResponseBankingPayeeByIdV2](https://apis.io/schemas/amp-bank/amp-bank-response-banking-payee-by-id-v2/)
+- [ResponseBankingPayeeListV2](https://apis.io/schemas/amp-bank/amp-bank-response-banking-payee-list-v2/)
+- [ResponseBankingProductByIdV7](https://apis.io/schemas/amp-bank/amp-bank-response-banking-product-by-id-v7/)
+- [ResponseBankingProductListV4](https://apis.io/schemas/amp-bank/amp-bank-response-banking-product-list-v4/)
+- [ResponseBankingScheduledPaymentsListV2](https://apis.io/schemas/amp-bank/amp-bank-response-banking-scheduled-payments-list-v2/)
+- [ResponseBankingTransactionByIdV3](https://apis.io/schemas/amp-bank/amp-bank-response-banking-transaction-by-id-v3/)
+- [ResponseBankingTransactionListV2](https://apis.io/schemas/amp-bank/amp-bank-response-banking-transaction-list-v2/)
 
-#### Tags
+#### JSON-LD (1)
 
-- CDR
-- Open Banking
-- Product Reference Data
-- Small Business
-- Australia
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [Amp Bank Context](https://apis.io/jsonld/amp-bank/amp-bank-context/)
 
-- [Documentation](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
-- [API Reference](https://consumerdatastandardsaustralia.github.io/standards/#get-products)
-- [OpenAPI](openapi/amp-bank-cds-banking-products-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+#### Examples (1)
 
-## CDR / Open Banking Notes
+Example requests and responses.
 
-AMP Bank's public API surface is its Consumer Data Right **Product Reference Data (PRD)** endpoints — one per brand — which return banking product data without authentication (only the CDS `x-v` version header is required). The broader CDR consumer data sharing surface (accounts, balances, transactions) is not public; it is gated behind the CDR Accredited Data Recipient (ADR) model using OAuth2/OIDC with the FAPI 1.0 Advanced profile, MTLS, and PAR.
+- [Amp Bank Banking Products Live Response](https://apis.io/examples/amp-bank/amp-bank-banking-products-live-response/)
 
-The harvested OpenAPI in `openapi/` is the **shared DSB Consumer Data Standards "CDR Banking API" (v1.36.0)**, not an AMP-proprietary contract — AMP conforms to this common standard rather than publishing its own spec.
+#### Collections (7)
 
-## Common Properties
+Postman and Open Collection request collections.
+
+- [CDR Banking Banking Account Balances API](https://apis.io/collections/amp-bank/open-amp-bank-banking-account-balances-api/)
+- [CDR Banking Banking Account Balances Banking Account Direct Debits API](https://apis.io/collections/amp-bank/open-amp-bank-banking-account-direct-debits-api/)
+- [CDR Banking Banking Account Balances Banking Account Scheduled Payments API](https://apis.io/collections/amp-bank/open-amp-bank-banking-account-scheduled-payments-api/)
+- [CDR Banking Banking Account Balances Banking Account Transactions API](https://apis.io/collections/amp-bank/open-amp-bank-banking-account-transactions-api/)
+- [CDR Banking Banking Account Balances Banking Accounts API](https://apis.io/collections/amp-bank/open-amp-bank-banking-accounts-api/)
+- [CDR Banking Banking Account Balances Banking Payees API](https://apis.io/collections/amp-bank/open-amp-bank-banking-payees-api/)
+- [CDR Banking Banking Account Balances Banking Products API](https://apis.io/collections/amp-bank/open-amp-bank-banking-products-api/)
+
+#### Overlays (7)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Amp Bank Banking Account Balances Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-account-balances-api-overlay/)
+- [Amp Bank Banking Account Direct Debits Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-account-direct-debits-api-overlay/)
+- [Amp Bank Banking Account Scheduled Payments Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-account-scheduled-payments-api-overlay/)
+- [Amp Bank Banking Account Transactions Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-account-transactions-api-overlay/)
+- [Amp Bank Banking Accounts Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-accounts-api-overlay/)
+- [Amp Bank Banking Payees Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-payees-api-overlay/)
+- [Amp Bank Banking Products Api Overlay](https://apis.io/overlays/amp-bank/amp-bank-banking-products-api-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [AMP Bank API Rules](https://apis.io/rules/amp-bank/amp-bank-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amp Bank Authentication](https://apis.io/security/amp-bank/amp-bank-authentication/)
+- [Amp Bank Domain Security](https://apis.io/security/amp-bank/amp-bank-domain-security/)
+- [Amp Bank Vulnerability Disclosure](https://apis.io/security/amp-bank/amp-bank-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Amp Bank Scopes](https://apis.io/scopes/amp-bank/amp-bank-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amp Bank Plans Pricing](https://apis.io/plans/amp-bank/amp-bank-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amp Bank Rate Limits](https://apis.io/rate-limits/amp-bank/amp-bank-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.amp.com.au/)
 - [Documentation](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
-- [LinkedIn](https://www.linkedin.com/company/amp)
-- [Terms of Service](https://www.amp.com.au/terms-and-conditions)
-- [Privacy Policy](https://www.amp.com.au/privacy)
+- [Getting started](https://www.amp.com.au/personal-banking/open-banking/open-banking-api)
+- [Pricing](https://www.amp.com.au/investments/pricing-and-performance)
 - [Support](https://www.amp.com.au/help-and-support)
+- [Blog](https://www.amp.com.au/about-amp/news)
+- [Security](https://www.amp.com.au/help-and-support/security)
+- [Terms of service](https://www.amp.com.au/terms-and-conditions)
+- [Privacy policy](https://www.amp.com.au/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 54.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 61.6 |
+| Contract governance | 22.0 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 44.7 |
+
+**Agent readiness 29.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 37.8** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amp-bank/](https://apis.io/providers/amp-bank/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AMP Bank: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amp-bank/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
